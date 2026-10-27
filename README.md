@@ -9,10 +9,7 @@ Filtro FIR ad alte prestazioni in VHDL basato su architettura ad array sistolico
 2. [Architettura Hardware (RTL)](#2-architettura-hardware-rtl)
 3. [Metodologia di Simulazione e Verifica](#3-metodologia-di-simulazione-e-verifica)
 4. [Struttura del Repository](#4-struttura-del-repository)
-5. [Quick Start ed Esecuzione della Simulazione](#5-quick-start-ed-esecuzione-della-simulazione)
-6. [Sviluppi Futuri](#6-sviluppi-futuri)
-7. [Note dell'Autore](#7-note-dellautore)
-
+5. [Sviluppi Futuri](#6-sviluppi-futuri)
 ---
 
 ## 1. Background Teorico: Array Sistolici e FIR in Hardware
@@ -103,3 +100,8 @@ Infine, Python legge l'output hardware ed esegue una **Fast Fourier Transform (F
 ├── model/
 │   └── fir_golden_model.py # Script Python per generazione e FFT
 └── README.md
+```
+## 5. Sviluppi futuri
+  1.Implementazione di un AXI4-Stream Wrapper per l'integrazione plug-and-play nei Block Design di Vivado.
+  2.Interfaccia AXI4-Lite per aggiornare i coefficienti del filtro a runtime tramite processore ARM interno (Zynq).
+  3.Inserimento dello stadio di output Shift, Round & Saturate per estrarre 16 bit normalizzati dall'accumulatore a 48 bit senza rischio di overflow distruttivi.
