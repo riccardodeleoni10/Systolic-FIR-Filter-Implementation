@@ -78,7 +78,8 @@ Infine, Python legge l'output hardware ed esegue una **Fast Fourier Transform (F
 ### Risultati di Implementazione 
 *Dati riferiti alla fase di Post-Implementation (Place & Route completato).*
 
-> 🖼️ **[INSERIRE QUI IMMAGINE: vivado_timing_report.png]**
+![App Dashboard Layout](images/dashboard.png)
+
 > *Didascalia: Report di Timing di Vivado che certifica l'assenza di violazioni di Setup/Hold (Slack Positivo) grazie all'assorbimento nativo nei DSP.*
 
 | Target FPGA | Clock Period Constraint | Setup WNS | Max Freq Equivalente ($F_{max}$) | Throughput |
