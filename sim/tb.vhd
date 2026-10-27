@@ -30,7 +30,7 @@ architecture Sim of tb_Systolic_FIR is
 
 begin
 
-    -- Istanziazione del DUT (Direct Entity Instantiation, molto più pulita)
+    -- Istanziazione del DUT (Direct Entity Instantiation, molto piÃ¹ pulita)
     dut: entity work.Systolic_FIR
         generic map (
             DW   => DW,
@@ -111,8 +111,8 @@ begin
         
         if rst_i = '0' and not sim_done then
             -- ATTENZIONE: Il tipo 'integer' in VHDL arriva a massimo 32 bit.
-            -- Poiché il nostro accumulatore è a 48 bit, estraiamo i 32 bit più bassi (troncamento).
-            -- Per segnali audio standard e 31 Taps, il segnale non sborderà mai oltre i 32 bit.
+            -- PoichÃ© il nostro accumulatore Ã¨ a 48 bit, estraiamo i 32 bit piÃ¹ bassi (troncamento).
+            -- Per segnali audio standard e 31 Taps, il segnale non sborderÃ  mai oltre i 32 bit.
             v_out_int := to_integer(signed(fir_s_o(31 downto 0)));
             
             write(v_line, v_out_int);
