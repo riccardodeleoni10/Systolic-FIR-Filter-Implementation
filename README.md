@@ -102,6 +102,7 @@ Infine, Python legge l'output hardware ed esegue una **Fast Fourier Transform (F
 └── README.md
 ```
 ## 5. Sviluppi futuri
-  1.Implementazione di un AXI4-Stream Wrapper per l'integrazione plug-and-play nei Block Design di Vivado.
-  2.Interfaccia AXI4-Lite per aggiornare i coefficienti del filtro a runtime tramite processore ARM interno (Zynq).
-  3.Inserimento dello stadio di output Shift, Round & Saturate per estrarre 16 bit normalizzati dall'accumulatore a 48 bit senza rischio di overflow distruttivi.
+1. Implementazione di interfaccia AXI-Strem
+2. Implementazione di interfaccia AXI-Lite per riconfigurare i pesi
+3. Logica di Shift, Round & Saturate per estrarre 16 bit normalizzati dall'accumulatore a 48 bit senza rischio di overflow.
+ 
