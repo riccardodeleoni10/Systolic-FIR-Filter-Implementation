@@ -72,13 +72,13 @@ Uno script Python (`scipy.signal`) genera il segnale di stimolo (utile + rumore)
 Il modulo `tb_Systolic_FIR.vhd` utilizza la libreria `TEXTIO` per leggere i vettori, stimolare il sistema e riversare l'accumulatore a 48-bit (troncato a 32-bit utili) in `output.txt`. 
 Infine, Python legge l'output hardware ed esegue una **Fast Fourier Transform (FFT)** per confrontare lo spettro.
 
-> 🖼️ **[INSERIRE QUI IMMAGINE: python_fft_dashboard.png]**
-> *Didascalia: Dashboard generata dallo script Python. In basso a destra, l'analisi FFT dimostra la perfetta sovrapposizione tra il filtro ideale in Python (verde) e il calcolo fixed-point hardware dell'FPGA (rosso tratteggiato).*
+![App Dashboard Layout](images/dashboard.png)
+> *Dashboard generata dallo script Python. In basso a destra, l'analisi FFT dimostra la perfetta sovrapposizione tra il filtro ideale in Python (verde) e il calcolo fixed-point hardware dell'FPGA (rosso tratteggiato).*
 
 ### Risultati di Implementazione 
 *Dati riferiti alla fase di Post-Implementation (Place & Route completato).*
 
-![App Dashboard Layout](images/dashboard.png)
+
 
 > *Didascalia: Report di Timing di Vivado che certifica l'assenza di violazioni di Setup/Hold (Slack Positivo) grazie all'assorbimento nativo nei DSP.*
 
