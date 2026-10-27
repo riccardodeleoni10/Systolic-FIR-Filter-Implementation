@@ -62,10 +62,7 @@ begin
             mul_reg <= (others => '0');
             y_o     <= (others => '0');
         else
-            -- 1. Stadio Moltiplicatore (M-Register)
             mul_reg <= resize(signed(coeff_s) * signed(data_s), ACCW);
-            
-            -- 2. Stadio Sommatore (P-Register dell'immagine)
             y_o <= std_logic_vector(signed(y_prev_i) + mul_reg);
         end if;
     end if;
