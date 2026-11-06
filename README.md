@@ -69,7 +69,7 @@ The PEs are cascaded into a one-dimensional chain using a VHDL `generate` statem
 Validation goes beyond visual waveform inspection by employing an automated co-simulation workflow against a software **Golden Model**.
 
 ### Python Golden Model Workflow
-A Python script (`scipy.signal`) generates both the composite test stimulus (low-frequency target signal + high-frequency noise) and the ideal mathematical filter response. Since the hardware FIR operates in integer arithmetic, the floating-point coefficients are quantized to **16-bit Q15** fixed-point format and exported to `coeff.txt`.
+A Python script (`scipy.signal`) generates both the composite test stimulus (low-frequency target signal + high-frequency noise), in `samples.txt`, and the ideal mathematical filter response. Since the hardware FIR operates in integer arithmetic, the floating-point coefficients are quantized to **16-bit Q15** fixed-point format and exported to `coeff.txt`.
 
 ### VHDL Testbench and Spectral Analysis
 The `tb_Systolic_FIR.vhd` testbench module uses the standard `TEXTIO` library to read the input vectors, stimulate the DUT, and dump the 48-bit accumulator output (truncated to 32 useful bits) into `output.txt`.  
