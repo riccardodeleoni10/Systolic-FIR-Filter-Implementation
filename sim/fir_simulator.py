@@ -4,22 +4,22 @@ import matplotlib.pyplot as plt
 import os
 
 # ==========================================
-# 1. PARAMETRI DI CONFIGURAZIONE
+# 1. PARAMETERS
 # ==========================================
-FS = 1000.0         # Frequenza di campionamento (Hz)
-F1 = 20.0           # Frequenza utile (Hz)
-F2 = 100.0          # Rumore da filtrare (Hz)
-N_SAMPLES = 2000    # Numero di campioni da generare
+FS = 1000.0         # Sampling frequency (Hz)
+F1 = 20.0           # Frequency 1(Hz)
+F2 = 100.0          # Frequency 2 (Hz)
+N_SAMPLES = 2000    # Samples number
 
-TAPS = 17           # Numero di coefficienti
-FILTER_TYPE = 'low' 
-FC = 100.0          # Frequenza di taglio (Hz)
+TAPS = 17           # Taps number
+FILTER_TYPE = 'low' # Filter type
+FC = 100.0          # Cut-off frequency (Hz)
 
-# Lavoriamo a 16-bit signed (Q15) per l'hardware
+# cast to 16 signed 
 Q_MAX = (2**15) - 1 # 32767
 
 # ==========================================
-# 2. GENERAZIONE SEGNALE
+# 2. SIGNAL GENERATION
 # ==========================================
 t = np.arange(N_SAMPLES) / FS
 s1 = 0.5 * np.sin(2 * np.pi * F1 * t)
@@ -27,7 +27,7 @@ s2 = 0.5 * np.sin(2 * np.pi * F2 * t)
 x_in = s1 + s2 
 
 # ==========================================
-# 3. PROGETTO DEL FILTRO E QUANTIZZAZIONE
+# 3. FILTER COEFFICIENTS AND QUANTIZATION
 # ==========================================
 pass_zero = True if FILTER_TYPE == 'low' else False
 coeffs = signal.firwin(TAPS, FC, fs=FS, pass_zero=pass_zero)
@@ -40,7 +40,7 @@ np.savetxt("coeffs.txt", coeffs_q15, fmt="%d")
 np.savetxt("samples.txt", x_in_q15, fmt="%d")
 
 # ==========================================
-# 4. LETTURA USCITA FPGA E MODELLO IDEALE
+# 4. READING DATA FROM HW TEST-BENCH
 # ==========================================
 fpga_output_exists = os.path.exists("output.txt")
 if fpga_output_exists:
@@ -50,30 +50,24 @@ if fpga_output_exists:
 y_ideal = signal.lfilter(coeffs, 1.0, x_in)
 
 # ==========================================
-# 5. CALCOLO FFT (Spettro in Frequenza)
+# 5. FFT (Spectral Analysis) 
 # ==========================================
 freqs = np.fft.rfftfreq(N_SAMPLES, 1/FS)
-
-# Spettro Ingresso
 fft_in = np.abs(np.fft.rfft(x_in)) * 2 / N_SAMPLES
-
-# Spettro Uscita Ideale (Python)
 fft_ideal = np.abs(np.fft.rfft(y_ideal)) * 2 / N_SAMPLES
-
-# Spettro Uscita FPGA
 if fpga_output_exists:
     min_len = min(N_SAMPLES, len(y_fpga_norm))
     fft_fpga = np.abs(np.fft.rfft(y_fpga_norm[:min_len], n=N_SAMPLES)) * 2 / N_SAMPLES
 
 # ==========================================
-# 6. PLOTTING (Layout Personalizzato a 5 Grafici)
+# 6. PLOT
 # ==========================================
 fig = plt.figure(figsize=(16, 12))
 gs = fig.add_gridspec(3, 2, height_ratios=[1, 1.2, 1.2], hspace=0.35)
 
-view_samples = int(0.1 * FS) # Visualizza 0.1 secondi nel tempo
+view_samples = int(0.1 * FS) 
 
-# -- PLOT 1: Risposta in Frequenza (Occupa tutta la prima riga) --
+# -- PLOT 1 --
 ax1 = fig.add_subplot(gs[0, :])
 w, h = signal.freqz(coeffs_q15, worN=1024, fs=FS)
 h_norm = np.abs(h) / Q_MAX 
@@ -85,7 +79,7 @@ ax1.set_xlabel('Frequenza [Hz]')
 ax1.grid(True)
 ax1.legend()
 
-# -- PLOT 2: Dominio del Tempo (Ingresso) --
+# -- PLOT 2 --
 ax2 = fig.add_subplot(gs[1, 0])
 ax2.plot(t[:view_samples], x_in[:view_samples], 'k', label='Mixed Signal (F1+F2)')
 ax2.plot(t[:view_samples], s1[:view_samples], 'r--', alpha=0.7, label=f'Utile ({F1}Hz)')
@@ -95,7 +89,7 @@ ax2.set_ylabel('Ampiezza')
 ax2.grid(True)
 ax2.legend()
 
-# -- PLOT 3: FFT Spettro (Ingresso) --
+# -- PLOT 3: FFT  (Input) --
 ax3 = fig.add_subplot(gs[1, 1])
 ax3.plot(freqs, fft_in, 'k', label='Spettro Ingresso (F1+F2)')
 ax3.axvline(F1, color='green', linestyle=':', alpha=0.7, label=f'Segnale {F1}Hz')
@@ -107,7 +101,7 @@ ax3.set_xlim(0, FS/2)
 ax3.grid(True)
 ax3.legend()
 
-# -- PLOT 4: Dominio del Tempo (Uscita) --
+# -- PLOT 4 --
 ax4 = fig.add_subplot(gs[2, 0])
 ax4.plot(t[:view_samples], y_ideal[:view_samples], 'g-', linewidth=3, alpha=0.5, label='Ideale (Python)')
 if fpga_output_exists:
@@ -121,7 +115,7 @@ ax4.set_ylabel('Ampiezza')
 ax4.grid(True)
 ax4.legend(loc='lower right')
 
-# -- PLOT 5: FFT Spettro (Uscita) --
+# -- PLOT 5: FFT (output) --
 ax5 = fig.add_subplot(gs[2, 1])
 ax5.plot(freqs, fft_ideal, 'g-', linewidth=3, alpha=0.5, label='Spettro Filtrato (Python)')
 if fpga_output_exists:
