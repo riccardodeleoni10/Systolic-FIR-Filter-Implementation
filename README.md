@@ -83,7 +83,7 @@ Finally, Python parses the hardware output log and performs a **Fast Fourier Tra
 
 | Target FPGA | Clock Period Constraint | Setup WNS | Equivalent Max Freq ($F_{max}$) | Throughput |
 | :--- | :--- | :--- | :--- | :--- |
-| **Zynq UltraScale+ (ZCU111)** | 4.0 ns (250 MHz) | +2.94 ns | **~ 1 GHz** (Silicon-limited) | 1 Sample / Clock |
+| **Zynq UltraScale+ (ZCU111)** | 4.0 ns (250 MHz) | +2.78 ns | **~ 1 GHz** (Silicon-limited) | 1 Sample / Clock |
 | **Artix-7 (Arty A7-35T)** | 10.0 ns (100 MHz) | *TBD* | **> 300 MHz** | 1 Sample / Clock |
 
 ---
