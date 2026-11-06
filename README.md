@@ -81,9 +81,6 @@ Finally, Python parses the hardware output log and performs a **Fast Fourier Tra
 ### Implementation Results
 *Data extracted from Post-Implementation (Place & Route completed) reports.*
 
-![Vivado Timing Report](images/timing_report.png)
-> *Vivado Timing Summary report certifying the absence of Setup/Hold violations (Positive Slack) thanks to native absorption into the DSP slices.*
-
 | Target FPGA | Clock Period Constraint | Setup WNS | Equivalent Max Freq ($F_{max}$) | Throughput |
 | :--- | :--- | :--- | :--- | :--- |
 | **Zynq UltraScale+ (ZCU111)** | 4.0 ns (250 MHz) | +2.94 ns | **~ 1 GHz** (Silicon-limited) | 1 Sample / Clock |
