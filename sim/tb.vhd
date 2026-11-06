@@ -50,8 +50,8 @@ begin
 end process;
 
 stimulus_proc: process
-    file fd_coeff     : text open read_mode is "C:/Users/Riccardo/Documents/Progetti_personali/Array_Sistolico/coeffs.txt";
-    file fd_samples   : text open read_mode is "C:/Users/Riccardo/Documents/Progetti_personali/Array_Sistolico/samples.txt";
+    file fd_coeff     : text open read_mode is "/path/to/coeffs.txt";
+    file fd_samples   : text open read_mode is "/path/to/samples.txt";
     variable v_line   : line;
     variable v_int    : integer;
 begin
