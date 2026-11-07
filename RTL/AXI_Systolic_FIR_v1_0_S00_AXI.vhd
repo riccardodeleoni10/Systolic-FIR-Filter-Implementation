@@ -109,7 +109,7 @@ architecture arch_imp of AXI_Systolic_FIR_v1_0_S00_AXI is
 	signal coeff_slv_regs: slv_reg_t := (others => (others => '0')); -- Inizializzazione utile in simulazione
 	signal packed_coeff: std_logic_vector ((C_TAPS*C_DW)-1 downto 0);
 	
-	-- Rimossi slv_reg0, 1, 2, 3 perche' non più usati
+	-- Rimossi slv_reg0, 1, 2, 3 perche' non piÃ¹ usati
 	
 	signal slv_reg_rden	: std_logic;
 	signal slv_reg_wren	: std_logic;
