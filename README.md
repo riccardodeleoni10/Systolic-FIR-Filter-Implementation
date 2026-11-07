@@ -105,6 +105,6 @@ Finally, Python parses the hardware output log and performs a **Fast Fourier Tra
 ---
 
 ## 5. Future Improvements
-1. **AXI4-Stream Interface:** Implementation of standard `TVALID`/`TREADY`/`TDATA` handshaking for plug-and-play integration in Vivado IP Integrator (Now Work in Progress in [Develop](https://github.com/riccardodeleoni10/Systolic-FIR-Filter-Implementation/tree/develop/RTL):hourglass_flowing_sand:.
+1. **AXI4-Stream Interface:** Implementation of standard `TVALID`/`TREADY`/`TDATA` handshaking for plug-and-play integration in Vivado IP Integrator (Now Work in Progress in [Develop](https://github.com/riccardodeleoni10/Systolic-FIR-Filter-Implementation/tree/develop/RTL):hourglass_flowing_sand:).
 2. **AXI4-Lite Interface:** Runtime weight reconfiguration via memory-mapped registers.
 3. **Shift, Round & Saturate Logic:** Dedicated output stage to extract normalized 16-bit samples from the 48-bit accumulator without overflow risk.
