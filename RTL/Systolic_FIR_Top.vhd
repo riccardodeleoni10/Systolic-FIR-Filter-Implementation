@@ -148,7 +148,7 @@ end component Systolic_FIR;
         variable result_rom   : std_logic_vector((C_TAPS*C_DW)-1 downto 0) := (others => '0');
         variable line_count   : integer := 0;
     begin
-        -- Se il nome del file è vuoto (es. in simulazione prima di settarlo), restituisci zero
+        -- Se il nome del file Ã¨ vuoto (es. in simulazione prima di settarlo), restituisci zero
         if init_File = "" then
             report "Nessun file coefficienti specificato (COEFF_FILE vuoto). Inizializzazione a 0." severity warning;
             return result_rom;
