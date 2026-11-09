@@ -38,9 +38,9 @@ The table below illustrates the **Wavefront Timing** for a 2-tap filter computin
 | Clock | Input ($X$) | PE 0 (Weight $h_0$) | Extra $X$ Delay | PE 1 (Weight $h_1$) | System Output ($Y_{out}$) |
 | :---: | :---: | :--- | :--- | :--- | :--- |
 | **0** | $x[0]$ | Computes: $$y_0 = h_0 \cdot x[0]$$ | Latches $x[0]$ (1st delay) | Idle | - |
-| **1** | $x[1]$ | Computes: $$y_1 = h_0 \cdot x[1]$$ <br> *Sends $y_0$ to PE1* | Latches $x[1]$ <br> *Sends $x[0]$ to PE1* (2nd delay) | Idle (receives $y_0$, waiting for $x[0]$) | - |
-| **2** | $x[2]$ | Computes: $$y_2 = h_0 \cdot x[2]$$ <br> *Sends $y_1$ to PE1* | Latches $x[2]$ <br> *Sends $x[1]$ to PE1* | Receives $y_1$ and $x[0]$. <br> Computes: **$$y_1 + h_1 \cdot x[0]$$** | Partial $$y[0]$$ exits |
-| **3** | $x[3]$ | Computes: $$y_3 = h_0 \cdot x[3]$$ <br> *Sends $y_2$ to PE1* | Latches $x[3]$ <br> *Sends $x[2]$ to PE1* | Receives $y_2$ and $x[1]$. <br> Computes: **$$y_2 + h_1 \cdot x[1]$$** | **Full $y[1]$ exits!** <br> $(h_0 x[1] + h_1 x[0])$ |
+| **1** | $x[1]$ | Computes: $$y_1 = h_0 \cdot x[1]$$ <br> *Sends $$y_0$$ to PE1* | Latches $x[1]$ <br> *Sends $$x[0]$$ to PE1* (2nd delay) | Idle (receives $$y_0$$, waiting for $$x[0]$$) | - |
+| **2** | $$x[2]$$ | Computes: $$y_2 = h_0 \cdot x[2]$$ <br> *Sends $$y_1$ to PE1* | Latches $x[2]$$ <br> *Sends $x[1]$ to PE1* | Receives $$y_1$$ and $$x[0]$$. <br> Computes: **$$y_1 + h_1 \cdot x[0]$$** | Partial $$y[0]$$ exits |
+| **3** | $$x[3]$$ | Computes: $$y_3 = h_0 \cdot x[3]$$ <br> *Sends $$y_2$$ to PE1* | Latches $$x[3]$$ <br> *Sends $$x[2]$ to PE1* | Receives $$y_2$$ and $$x[1]$$. <br> Computes: **$$y_2 + h_1 \cdot x[1]$$** | **Full $$y[1]$$ exits!** <br> $$(h_0 x[1] + h_1 x[0])$$ |
 
 As shown above, at Clock 2, PE 1 simultaneously receives the partial sum associated with sample $x[1]$ and the delayed input sample $x[0]$, enabling the exact computation of the first valid filtered sample $y[1]$ (which appears registered at the system output on Clock 3).
 
